@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, type TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -19,10 +21,13 @@ import { AppService } from './app.service';
         database: configService.get<string>('DB_NAME', 'ferret-db'),
         autoLoadEntities: true,
         synchronize: false,
+        migrations: [join(__dirname, 'database/migrations/*{.js,.ts}')],
+        migrationsRun: true,
         retryAttempts: 10,
         retryDelay: 3000,
       }),
     }),
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
