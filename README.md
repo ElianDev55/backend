@@ -32,6 +32,8 @@ DB_PORT=5432
 DB_USERNAME=admin
 DB_PASSWORD=password123
 DB_NAME=ferret-db
+DB_SSL=false
+DB_SSL_REJECT_UNAUTHORIZED=true
 CORS_ORIGINS=http://localhost:5173
 THROTTLE_TTL_MS=60000
 THROTTLE_LIMIT=60
@@ -45,6 +47,8 @@ WOMPI_POLL_ATTEMPTS=10
 ```
 
 Nunca subas `.env` al repositorio. La llave privada y la llave de integridad solo deben existir en el backend.
+
+Para AWS RDS usa el endpoint de la instancia, conserva `DB_PORT=5432` y activa `DB_SSL=true`. En el Security Group permite TCP `5432` únicamente desde la IP o red privada donde se ejecutará el backend.
 
 ## Ejecucion
 

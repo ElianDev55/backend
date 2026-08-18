@@ -38,6 +38,16 @@ import { ProductsModule } from './products/products.module';
         username: configService.get<string>('DB_USERNAME', 'admin'),
         password: configService.get<string>('DB_PASSWORD', 'password123'),
         database: configService.get<string>('DB_NAME', 'ferret-db'),
+        ssl:
+          configService.get<string>('DB_SSL', 'false') === 'true'
+            ? {
+                rejectUnauthorized:
+                  configService.get<string>(
+                    'DB_SSL_REJECT_UNAUTHORIZED',
+                    'true',
+                  ) === 'true',
+              }
+            : false,
         autoLoadEntities: true,
         synchronize: false,
         migrations: [join(__dirname, 'database/migrations/*{.js,.ts}')],
@@ -52,7 +62,6 @@ import { ProductsModule } from './products/products.module';
     CheckoutModule,
     DeliveriesModule,
     TransactionsModule,
-    CheckoutModule,
   ],
   controllers: [AppController],
   providers: [
