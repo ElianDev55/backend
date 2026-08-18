@@ -6,10 +6,12 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Customer } from '../../customers/entities/customer.entity';
+import { Delivery } from '../../deliveries/entities/delivery.entity';
 import { BillStatus } from '../bills.types';
 import { BillItem } from './bill-item.entity';
 
@@ -30,6 +32,9 @@ export class Bill {
     cascade: ['insert'],
   })
   items!: BillItem[];
+
+  @OneToOne(() => Delivery, (delivery) => delivery.bill)
+  delivery?: Delivery;
 
   @Column({ type: 'varchar', length: 20, default: BillStatus.PENDING })
   status!: BillStatus;
