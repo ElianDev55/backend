@@ -4,6 +4,7 @@ import { TypeOrmModule, type TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BillsModule } from './bills/bills.module';
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 
@@ -30,6 +31,7 @@ import { ProductsModule } from './products/products.module';
     }),
     ProductsModule,
     CustomersModule,
+    BillsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
