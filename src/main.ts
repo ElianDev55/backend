@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 function parseCorsOrigins(value: string): string[] {
@@ -31,6 +32,19 @@ async function bootstrap() {
         whitelist: true,
       }),
     );
+
+    const swaggerConfig = new DocumentBuilder()
+      .setTitle('Product Checkout API')
+      .setDescription(
+        'API for products, customers, bills, deliveries and transactions.',
+      )
+      .setVersion('1.0')
+      .build();
+    const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('docs', app, swaggerDocument, {
+      jsonDocumentUrl: 'docs-json',
+    });
+
     await app.listen(process.env.PORT ?? 3000);
   } catch (error) {
     const message =
