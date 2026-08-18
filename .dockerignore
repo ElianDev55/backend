@@ -1,0 +1,32 @@
+# Dependencies and compiled output
+node_modules
+dist
+build
+coverage
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Tests and local tooling
+.nyc_output
+.temp
+.tmp
+.vscode
+.idea
+
+# OS files
+.DS_Store
+
+# Git metadata
+.git
+.gitignore
