@@ -18,12 +18,13 @@ async function bootstrap() {
     const corsOrigins = parseCorsOrigins(
       configService.get<string>('CORS_ORIGINS', 'http://localhost:5173'),
     );
+    const allowAnyOrigin = corsOrigins.includes('*');
 
     app.enableCors({
       allowedHeaders: ['Accept', 'Authorization', 'Content-Type'],
       credentials: false,
       methods: ['GET', 'HEAD', 'POST', 'PATCH', 'OPTIONS'],
-      origin: corsOrigins,
+      origin: allowAnyOrigin ? true : corsOrigins,
     });
     app.useGlobalPipes(
       new ValidationPipe({
