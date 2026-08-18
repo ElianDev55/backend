@@ -12,6 +12,7 @@ import {
 } from 'typeorm';
 import { Customer } from '../../customers/entities/customer.entity';
 import { Delivery } from '../../deliveries/entities/delivery.entity';
+import { Transaction } from '../../transactions/entities/transaction.entity';
 import { BillStatus } from '../bills.types';
 import { BillItem } from './bill-item.entity';
 
@@ -35,6 +36,9 @@ export class Bill {
 
   @OneToOne(() => Delivery, (delivery) => delivery.bill)
   delivery?: Delivery;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.bill)
+  transactions!: Transaction[];
 
   @Column({ type: 'varchar', length: 20, default: BillStatus.PENDING })
   status!: BillStatus;
