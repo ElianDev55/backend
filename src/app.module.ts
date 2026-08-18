@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BillsModule } from './bills/bills.module';
+import { CheckoutModule } from './checkout/checkout.module';
 import { CustomersModule } from './customers/customers.module';
 import { DeliveriesModule } from './deliveries/deliveries.module';
 import { TransactionsModule } from './transactions/transactions.module';
@@ -48,8 +49,10 @@ import { ProductsModule } from './products/products.module';
     ProductsModule,
     CustomersModule,
     BillsModule,
+    CheckoutModule,
     DeliveriesModule,
     TransactionsModule,
+    CheckoutModule,
   ],
   controllers: [AppController],
   providers: [
